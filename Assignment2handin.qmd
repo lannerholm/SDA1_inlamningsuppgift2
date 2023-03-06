@@ -1,0 +1,112 @@
+---
+title: "Statistik och dataanalys I, 15 hp "
+subtitle: "Inlämningsuppgift 2, 1.5 hp"
+author: 
+- Namn 1
+- Namn 2
+- Namn 3
+date: last-modified
+format: 
+  html:
+    self-contained: true
+    code-line-numbers: true
+  pdf: default  
+  docx: default
+toc: true
+language: 
+  title-block-author-single: " "
+toc-title-document: "Innehåll"
+crossref-fig-title: "Figur"
+theme: Superhero
+title-block-banner-color: Primary
+title-block-published: "Publicerad"
+callout-warning-caption: "Varning"
+callout-note-caption: "Observera"
+callout-tip-caption: "Tips"
+editor: visual
+---
+
+::: callout-important
+## Inlämning
+
+Inlämningsuppgiften ska lämnas in i form av ett html dokument genererat av det här Quarto-dokumentet. Öppna upp code chunks under de uppgifter de behövs.
+
+**Kontrollera noga att du inte har några felmeddelande och att dokumentet kompileras utan problem**. Använd tydliga figurer och namnge axlarna med tydliga variabelnamn. Glöm inte att skriva era namn ovanför istället för Namn 1, Namn 2 och Namn 3.
+:::
+
+::: callout-tip
+## Matematiska symboler i rapporten
+
+Om en formel ska anges så är det ok att skriva det i vanlig text (markdown), typ
+
+xbar +- t(0.025,n-1)\*s/sqrt(n),
+
+Vill man vara lite fancy kan man ge sig på att skriva matematik med LaTeX genom att använda dubbla dollar-tecken:
+
+$\bar x \pm t_{0.025,n-1}\frac{s}{\sqrt n}$.
+
+LaTeX är fint, men lite krångligt att lära sig hur man ska skriva.
+:::
+
+Läs in dina paket här:
+
+```{r}
+#| echo: false
+#| output: false
+library(remotes)
+install_github("StatisticsSU/sda1paket")
+library(sda1)
+library(mosaic)
+library(gplots) # for the plotLowess function
+```
+
+och definiera vår dataframe `df` med datamaterialet:
+
+```{r}
+df = electricitycost
+head(df)
+```
+
+## 1. Poisson-modell för antal personer i hushållet
+
+#### 💪 Uppgift 1.1
+
+#### 💪 Uppgift 1.2
+
+#### 💪 Uppgift 1.3
+
+#### 💪 Uppgift 1.4
+
+## 2. (log)-normalmodell för elkostnad
+
+#### 💪 Uppgift 2.1
+
+#### 💪 Uppgift 2.2
+
+#### 💪 Uppgift 2.3
+
+#### 💪 Uppgift 2.4
+
+#### 💪 Uppgift 2.5
+
+#### 💪 Uppgift 2.6
+
+#### 💪 Uppgift 2.7
+
+#### 💪 Uppgift 2.8
+
+## 3. Enkel och multipel linjär regression
+
+#### 💪 Uppgift 3.1
+
+#### 💪 Uppgift 3.2
+
+#### 💪 Uppgift 3.3
+
+#### 💪 Uppgift 3.4
+
+#### 💪 Uppgift 3.5
+
+#### 💪 Uppgift 3.6
+
+#### 💪 Uppgift 3.7
