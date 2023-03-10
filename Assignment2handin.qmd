@@ -71,11 +71,73 @@ head(df)
 
 #### 💪 Uppgift 1.1
 
+Vi skattar lambda genom att ta medelvärdet av observerade data, och gör en modell av people från en Pois(lambda)-fördelning.
+
+```{r}
+extrapeople = df$people - 1
+lambda <- mean(extrapeople)
+xvalues <- 0:5
+pois_probs <- dpois(x = xvalues, lambda)
+```
+
 #### 💪 Uppgift 1.2
+
+Vi ritar stapeldiagram för observerade data, och för poisson-distributionen.
+
+```{r}
+names(pois_probs) <- xvalues
+observed <- tally(extrapeople, format = "proportion")
+par(mfrow = c(1, 2))
+barplot(observed, xlab  = "x", ylab = "P(X=x)", main = "Observerade data")
+barplot(pois_probs, col = "orange", xlab  = "x", ylab = "P(X=x)", main = "Poisson med lambda = 1.65")
+par(mfrow = c(1, 1))
+```
+
+Vi ser att diagrammen är lika, och drar slutsatsen att den skattade Poisson-modellen skattar datan väl.
 
 #### 💪 Uppgift 1.3
 
+Vi vill beräkna sannolikheten att att hushåll har fler än 4 personer. I R gör vi beräkningen:
+
+```{r}
+1 - ppois(4, lambda = lambda)
+```
+
+Sannolikheten att ett hushåll har fler än 4 personer är 2.63 procent.
+
 #### 💪 Uppgift 1.4
+
+Vi vet att variansen och väntevärdet för Poisson-fördelningen är 1.65. Variansen och väntevärdet för observerade datan fås från beräkningarna:
+
+```{r}
+observed_variance <- var(extrapeople)
+observed_expected_value <- weighted.mean(extrapeople)
+```
+
+vilket ger oss observerad varians = 1.43, och observerat väntevärde = 1.646.
+
+Det observerade väntevärdet är ungefär samma som väntevärdet för Poisson-fördelningen. Den observerade variansen skiljer sig dock. Frågan är om skillnaden är för stor för att Poisson-fördelningen ska vara en bra modell.
+
+Vi simulerar många stickprovsvarianser från poissonfördelningen och jämför med den observerade variansen.
+
+```{r}
+nsim <- 10000
+n <- length(extrapeople)
+simulated_variance <- rep(0, nsim)
+count <- 0
+for (i in 1:nsim) {
+  count <- count + 1
+  x <- rpois(n = n, lambda = lambda)
+  simulated_variance[count] <- var(x)
+}
+hist(simulated_variance, 30, freq = FALSE)
+x_grid <- seq(min(simulated_variance), max(simulated_variance), length = 40)
+standard_deviation <- sd(simulated_variance)
+normal_curve <- dnorm(x_grid, mean = mean(simulated_variance), sd = sd(simulated_variance))
+lines(x_grid, normal_curve, col = 2, lwd = 2)
+```
+
+I diagrammet kan vi avläsa att variansen hos observerade datan (1.42) skulle vara mycket ovanlig om den observerade datan verkligen följde en Poisson-distribution. Kanske är det därför olämpligt att använda poisson-fördelning för att modellera people.
 
 ## 2. (log)-normalmodell för elkostnad
 
